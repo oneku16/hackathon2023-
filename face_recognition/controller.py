@@ -28,4 +28,3 @@ def upload_user_picture(image_name, image: Image, collection_name=None):
 	else:
 		file_path = pathlib.Path(os.path.join(REFERENCE_IMAGES))
 	image.save(os.path.join(file_path, image_name + '.jpg'))
-
