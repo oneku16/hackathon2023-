@@ -25,21 +25,25 @@ class Collection:
         return result
 
     def collection_exists(self, collection_name: str) -> bool:
+        """:returns True if collections exists otherwise False"""
         return collection_name in self.collections
 
     def create_new_collection(self, collection_name: str):
+        """creates a new collection in bucket if collection does not exist"""
         if not self.collection_exists(collection_name):
             response = self.__client.create_collection(CollectionId=collection_name)
             if response['StatusCode'] != 200:
                 raise f'Could not create collection, {collection_name}, status code: {str(response["StatusCode"])}'
 
     def delete_collection(self, collection_name: str):
+        """deletes specific collection from the bucket"""
         try:
             self.__client.delete_collection(CollectionId=collection_name)
         except ClientError as exception:
             raise exception.response['Error']['Code']
 
     def get_faces(self, collection_name: str) -> List[dict]:
+        """:returns images in collection"""
         response = self.__client.list_faces(CollectionId=collection_name)
         tokens = True
         result = []
@@ -54,7 +58,9 @@ class Collection:
         return result
 
     def add_image(self, collection_name: str, image_path: str):
+        """adds new image to collection"""
         target_pic = self.__client.index_faces(CollectionId=collection_name, Image={'Bytes': get_image(image_path)},
                                                ExternalImageId=extract_file_name(image_path))
         if not target_pic['FaceRecords']:
-            raise Exception('No face found in the image')
+            # raise Exception('No face found in the image')
+            ...

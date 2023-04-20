@@ -2,7 +2,7 @@ import cv2
 import os
 from re import split
 import requests
-from config import CASCADE_CLASSIFIER, REFERENCE_IMAGES
+from config import CASCADE_CLASSIFIER, REFERENCE_IMAGES, EVENT_IMAGES
 from PIL import Image
 
 
@@ -31,6 +31,12 @@ def get_image(img_name: str) -> Image:
 def save_image(image: Image, file_name: str) -> None:
     image.save(os.path.join(REFERENCE_IMAGES, file_name))
 
+def rename_image(collection_name) -> None:
+
+    old_name = os.path.join(EVENT_IMAGES, collection_name)
+    for index, file in enumerate(os.listdir(os.path.join(EVENT_IMAGES, collection_name)), 1):
+        new_name = os.path.join(old_name, str(index) + '.jpg')
+        os.rename(os.path.join(os.path.join(old_name, file)), new_name)
 
 class ImageEditor:
     def __init__(self):
