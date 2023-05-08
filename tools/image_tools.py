@@ -6,6 +6,9 @@ from config import CASCADE_CLASSIFIER, REFERENCE_IMAGES, EVENT_IMAGES
 from PIL import Image
 
 
+def sort_pictures(pictures: Image):
+    ...
+
 def cut_picture(target_picture: str, scale_w=2.5, scale_h=2.5):
     img = cv2.imread(target_picture)
     width = img.shape[0] // scale_w
