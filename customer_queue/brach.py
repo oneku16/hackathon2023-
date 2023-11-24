@@ -1,34 +1,8 @@
-from collections import defaultdict, deque
-from customer_queue.Exceptions import NoCustomerInQueue
-
-
-class Line:
-    __slots__ = '__queue', '__late'
-
-    def __init__(self):
-        self.__queue = deque()
-        self.__late = deque()
-
-    def next_customer(self) -> int:
-        if self.__late:
-            queue_number = self.__late.popleft()
-            return queue_number
-        if self.__queue:
-            queue_number = self.__queue.popleft()
-            return queue_number
-        raise NoCustomerInQueue
-
-    def customer_in(self, queue_number: int) -> None:
-        if self.check_for_late(queue_number):
-            self.__late.appendleft(queue_number)
-        else:
-            self.__queue.appendleft(queue_number)
-
-    def customer_out(self):
-        ...
-
-    def check_for_late(self, queue_number: int) -> bool:
-        return queue_number < self.__queue[0]
+from customer_queue.in_bank_queue import Line
+from customer_queue.project_enums import Service
+from customer_queue.customer import Customer
+from typing import List, Dict
+from heapq import heappop, heappush
 
 
 class Branch:
@@ -36,4 +10,18 @@ class Branch:
 
     def __init__(self, branch_id):
         self.branch_id = branch_id
-        self.__lines = defaultdict(Line)
+        self.__lines: Dict[Service, List[Line]] = dict()
+
+    def add_new_line(self, line_type: Service = Service.TRANSFER) -> None:
+        if line_type not in self.__lines:
+            self.__lines[line_type] = list()
+        self.__lines[line_type].append(Line(line_number=len(self.__lines[line_type]) + 1, line_type=line_type))
+
+    def get_closest_line(self, line_type: Service = Service.TRANSFER) -> Line:
+        closet_line = heappop(self.__lines[line_type])
+        return closet_line
+
+    def customer_in(self, customer: Customer) -> None:
+        line = self.get_closest_line(line_type=customer.service_type)
+        line.customer_in(customer=customer)
+        heappush(self.__lines[customer.service_type], line)
