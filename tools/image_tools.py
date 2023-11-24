@@ -9,6 +9,7 @@ from PIL import Image
 def sort_pictures(picture: Image):
     return picture
 
+
 def cut_picture(target_picture: str, scale_w=2.5, scale_h=2.5):
     img = cv2.imread(target_picture)
     width = img.shape[0] // scale_w
@@ -16,16 +17,20 @@ def cut_picture(target_picture: str, scale_w=2.5, scale_h=2.5):
     resized_img = cv2.resize(img, (height, width))
     cv2.imwrite(target_picture, resized_img)
 
+
 def extract_file_name(file_name: str) -> str:
     return split('[\\\/]', file_name)[-1]
+
 
 def get_image_from_url(image_url: str):
     image_bytes = requests.get(image_url).content
     return image_bytes
 
+
 def get_image_from_file(file_name: str):
     with open(file_name, 'rb') as image_file:
         return image_file.read()
+
 
 def get_image(img_name: str) -> Image:
     return get_image_from_url(img_name) if img_name.lower().startswith('http') else get_image_from_file(img_name)
@@ -34,12 +39,13 @@ def get_image(img_name: str) -> Image:
 def save_image(image: Image, file_name: str) -> None:
     image.save(os.path.join(REFERENCE_IMAGES, file_name))
 
-def rename_image(collection_name) -> None:
 
+def rename_image(collection_name) -> None:
     old_name = os.path.join(EVENT_IMAGES, collection_name)
     for index, file in enumerate(os.listdir(os.path.join(EVENT_IMAGES, collection_name)), 1):
         new_name = os.path.join(old_name, str(index) + '.jpg')
         os.rename(os.path.join(os.path.join(old_name, file)), new_name)
+
 
 class ImageEditor:
     def __init__(self):

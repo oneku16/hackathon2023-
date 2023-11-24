@@ -23,8 +23,10 @@ def find_faces(collection_name: str, target_name: str):
     for face_info in faces_info:
         yield face_info['Face']['ExternalImageId']
 
+
 def find_text():
     ...
+
 
 def find_object():
     ...
