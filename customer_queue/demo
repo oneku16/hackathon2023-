@@ -1,0 +1,7 @@
+Branch(branch_id=Naryn-Main, lines=[{<Service.TRANSFER: 'transfer'>: [Line([Customer(customer_id='2'service_type=<Service.TRANSFER: 'transfer'> queue_type=<QueueType.OFFLINE: 'offline'>)
+])
+, Line([Customer(customer_id='1'service_type=<Service.TRANSFER: 'transfer'> queue_type=<QueueType.ONLINE: 'online'>)
+, Customer(customer_id='3'service_type=<Service.TRANSFER: 'transfer'> queue_type=<QueueType.ONLINE: 'online'>)
+])
+], <Service.DEPOSIT: 'deposit'>: [Line([])
+]}])
