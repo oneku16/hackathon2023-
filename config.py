@@ -6,6 +6,5 @@ MEDIA = os.path.join(current_dir, 'media_base')
 
 CASCADE_CLASSIFIER = 'cascades/data/haarcascade_frontalface_alt2.xml'
 
-REFERENCE_IMAGES = os.path.join(MEDIA, 'reference_images')
+REFERENCE_IMAGES = os.path.join(MEDIA, 'collections')
 EVENT_IMAGES = os.path.join(MEDIA, 'event_images')
-DATE_BASE = 'account/users.db'

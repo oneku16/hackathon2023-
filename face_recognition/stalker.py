@@ -3,7 +3,6 @@ from glob import glob
 from .aws_api import face_rekognition_api
 from .collection import Collection
 from config import REFERENCE_IMAGES, EVENT_IMAGES
-from json import loads
 
 
 def find_faces(collection_name: str, target_name: str):
@@ -15,8 +14,8 @@ def find_faces(collection_name: str, target_name: str):
     list_faces_name = glob(f'{full_path}/*.jpg')
     for victim in list_faces_name:
         if victim not in collection.collections:
+            collection.add_image(collection_name, victim)
             break
-            # collection.add_image(collection_name, victim)
 
     img_victim = path.join(REFERENCE_IMAGES, target_name)
     faces_info = face_rekognition_api(collection_name, img_victim)

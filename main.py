@@ -1,14 +1,57 @@
 from customer_queue.brach import Branch
 from customer_queue.customer import Customer
-from customer_queue.line import Line
 from customer_queue.project_enums import Service, QueueType
 from datetime import datetime
-from heapq import heappop
+from face_recognition.collection import Collection
+from config import MEDIA
+from os import path
+import psycopg2 as pg
 
 
-def main():
+def send_report():
+    try:
+        conn = pg.connect(
+            host='localhost',
+            database='postgres',
+            port=5432,
+            user='admin',
+            password='secret'
+        )
+        print("Connection established.")
+        cur = conn.cursor()
+        # cur.execute("""
+        #     CREATE TABLE IF NOT EXISTS Users(
+        #         customerId SERIAL PRIMARY KEY,
+        #         city VARCHAR(128),
+        #         serviceType VARCHAR(128),
+        #         queueType VARCHAR(128),
+        #         branch VARCHAR(64),
+        #         date DATE,
+        #         confirmationCode VARCHAR(64)
+        #     """)
+
+        conn.commit()
+        try:
+            cur.execute("""
+            SELECT name FROM Picture;
+            """)
+            path_name = cur.fetchall()
+            print(f'{path_name=}')
+
+        except Exception as error:
+            print('Something went wrong!')
+        print('Going to update Picture table.')
+        # cur.execute(f"""
+        # INSERT INTO Picture (id, name) VALUES ({cnt}, '{name[0]}');
+        # """)
+
+
+    except Exception as err:
+        raise err
+
+
     branch_naryn = Branch('Naryn-Main')
-    # branch_naryn.add_new_line(branch_naryn, Service.DEPOSIT)
+    branch_naryn.add_new_line(branch_naryn, Service.DEPOSIT)
     branch_naryn.add_new_line(branch_naryn, Service.TRANSFER)
     customers: list[Customer] = [
             Customer(customer_id='1',
@@ -25,25 +68,29 @@ def main():
                      queue_type=QueueType.ONLINE),
     ]
 
-    # customers.sort()
-    # print(customers)
-
-    # while customers:
-    #     print(heappop(customers))
-
     for customer in customers:
         branch_naryn.customer_in(customer=customer)
 
     for line_key, line_values in branch_naryn.lines.items():
-        print(type(line_values))
-        while line_values:
-            line = line_values.pop()
-            while line:
-                line.close_process()
+        print(line_values)
+        if line_values:
+            while line_values:
+                line = line_values.pop()
+                while line.queue + line.late:
+                    line.close_process()
+                    print(f'{line=}')
 
+
+def face():
+    collection = Collection()
+    # collection.delete_collection('customers')
+    # collection.create_new_collection('customers')
+    # collection.add_image('customers', path.join(MEDIA, 'collections', 'customers', '98765432.jpg'))
+    # print(len(collection.get_faces('customers')))
 
 if __name__ == '__main__':
-    main()
+    send_report()
+    # face()
 
 # from face_recognition.controller import get_user_picture, upload_user_picture
 # from face_recognition.collection import Collection

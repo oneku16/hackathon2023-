@@ -40,6 +40,7 @@ class Line:
         elif self.queue:
             current_customer = self.queue.pop()
         if current_customer is None:
+            print(f'No customer')
             return
         else:
             if current_customer.customer_out():

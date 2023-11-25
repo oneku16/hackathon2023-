@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  p {
+    color: #0f2336;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #0f2336;
+  }
+  
+  nav {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .nav__inner {
+    width: 1240px;
+    height: 50px;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .nav__inner_list {
+    width: 410px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav .nav__inner_list p {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  nav .nav__inner_list button {
+    width: 122px;
+    height: 50px;
+    background-color: #0f2336;
+    border-radius: 8px;
+    color: white;
+    border: 1px solid #0f2336;
+    font-size: 16px;
+    cursor: pointer;
+  }
+/* Основной контейнер */
+.container {
+    width: 80%;
+    max-width: 1140px;
+    margin: 40px auto;
+}
+
+/* Секция с информацией */
+.info {
+    display: flex;
+    align-items: center;
+    margin: 50px auto;
+    height: 600px;
+    background-color: #f4f5f6;
+    border-radius: 20px;
+    padding: 20px; /* Добавил отступы */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Тень блока */
+}
+
+.info form h2 {
+    font-size: 30px;
+    width: 100%; /* Занимает 100% ширины родительского контейнера */
+    max-width: 600px; /* Но не превышает максимальной ширины */
+    margin: 20px 0;
+}
+
+.info img {
+    width: 500px;
+    height: 500px;
+}
+
+.info__description {
+    width: 50%;
+    margin-left: 20px; /* Добавил отступ с левой стороны */
+}
+
+.info__description img {
+    width: 500px;
+    height: 500px;
+    margin-top: 50px;
+}
+
+.info__description h2 {
+    font-size: 25px;
+    max-width: 195px;
+    margin: 20px 0;
+}
+
+.info__description p {
+    max-width: 414px;
+    font-size: 16px;
+    color: #576d81;
+    line-height: 24px;
+}
+
+/* Стили формы */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #0f2336;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.submit-btn input {
+    background-color: #0f2336;
+    color: #fff;
+    cursor: pointer;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn input:hover {
+    background-color: #0056b3;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    text-align: right;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.modal-buttons button.confirm-btn {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.modal-buttons button.edit-btn {
+    background-color: #2196f3;
+    color: #fff;
+}
+
+.modal-buttons button.cancel-btn {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.modal-buttons button:hover {
+    background-color: #ddd;
+}

@@ -33,10 +33,5 @@ class Branch:
         line.start_process(customer=customer)
         heappush(self.__lines[customer.service_type], line)
 
-    def customer_out(self, line_number, line_type) -> None:
-        # print(f'{line_number=} {line_type=}')
-        # print(self.__lines[line_type])
-        ...
-
     def __repr__(self):
         return f'Branch(branch_id={self.branch_id}, lines=[{self.__lines}])'
